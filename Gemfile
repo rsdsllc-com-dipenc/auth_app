@@ -5,8 +5,6 @@ gem "sqlite3", "~> 1.4"
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: [:windows, :jruby]
 gem "bootsnap", require: false
-gem "sassc-rails"
-gem "image_processing", "~> 1.2"
 
 group :development do
   gem "letter_opener"
