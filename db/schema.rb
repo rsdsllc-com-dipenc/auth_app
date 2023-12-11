@@ -10,15 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_10_041627) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_10_061354) do
   create_table "api_keys", force: :cascade do |t|
     t.string "bearer_type"
     t.integer "bearer_id"
+    t.string "common_token_prefix", null: false
+    t.string "random_token_prefix", null: false
     t.string "token_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bearer_type", "bearer_id"], name: "index_api_keys_on_bearer"
+    t.index ["random_token_prefix", "bearer_id", "bearer_type"], name: "index_api_keys_on_random_token_and_bearer", unique: true
     t.index ["token_digest"], name: "index_api_keys_on_token_digest", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
